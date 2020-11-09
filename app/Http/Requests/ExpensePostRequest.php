@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Expense;
 
 class ExpensePostRequest extends FormRequest
 {
@@ -24,7 +25,11 @@ class ExpensePostRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => 'required|max:200',
+            'currency_id' => 'required',
+            'category_id' => 'required',
+            'value' => 'required',
+            'type' => \Rule::in(Expense::type)
         ];
     }
 }
